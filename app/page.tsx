@@ -1,6 +1,6 @@
 import { getFrameMetadata } from "@coinbase/onchainkit";
 import type { Metadata } from "next";
-import { NEXT_PUBLIC_URL } from "./config";
+import { NEXT_PUBLIC_URL, TEMPLATE_PUBLIC_URL } from "./config";
 
 const frameMetadata = getFrameMetadata({
   buttons: [
@@ -11,17 +11,17 @@ const frameMetadata = getFrameMetadata({
       label: "What is going on",
     },
   ],
-  image: `${NEXT_PUBLIC_URL}/main.png`,
+  image: `${TEMPLATE_PUBLIC_URL}/main.png`,
   post_url: `${NEXT_PUBLIC_URL}/api/account`,
 });
 
 export const metadata: Metadata = {
-  title: "Smart Account Frame Template",
+  title: "Metopia Service",
   description: "LFG",
   openGraph: {
     title: "Smart Account Frame Templatess",
     description: "LFG",
-    images: [`${NEXT_PUBLIC_URL}/main.png`],
+    images: [`${TEMPLATE_PUBLIC_URL}/main.png`],
   },
   other: {
     ...frameMetadata,

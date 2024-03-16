@@ -1,1 +1,2 @@
-export const NEXT_PUBLIC_URL = 'http://8.217.5.3:3000';
+export const TEMPLATE_PUBLIC_URL = 'https://frame-template.pimlico.io';
+export const NEXT_PUBLIC_URL = 'https://london.metopia.xyz/';
