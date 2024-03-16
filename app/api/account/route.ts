@@ -25,7 +25,7 @@ const paymasterClient = createPimlicoPaymasterClient({
 export async function POST(req: NextRequest): Promise<NextResponse> {
     const body: FrameRequest = await req.json();
     const { isValid, message } = await getFrameMessage(body, { neynarApiKey: process.env.NEYNAR_API_KEY! });
-    console.log("isvalid", isValid, message)
+    console.log("isvalid", isValid, message, body)
     if (!isValid) {
         return new NextResponse('Invalid Frame message', { status: 400 });
     }
