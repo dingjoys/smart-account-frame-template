@@ -15,17 +15,17 @@ const paymasterUrl = `https://api.pimlico.io/v2/sepolia/rpc?apikey=${apiKey}`
 const bundlerUrl = `https://api.pimlico.io/v1/sepolia/rpc?apikey=${apiKey}`
 
 const publicClient = createPublicClient({
-	transport: http("https://rpc.ankr.com/eth_sepolia"),
+    transport: http("https://rpc.ankr.com/eth_sepolia"),
 })
- 
+
 const paymasterClient = createPimlicoPaymasterClient({
-	transport: http(paymasterUrl),
+    transport: http(paymasterUrl),
 })
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
     const body: FrameRequest = await req.json();
     const { isValid, message } = await getFrameMessage(body, { neynarApiKey: process.env.NEYNAR_API_KEY! });
-
+    console.log("isvalid", isValid, message)
     if (!isValid) {
         return new NextResponse('Invalid Frame message', { status: 400 });
     }
@@ -52,13 +52,13 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     })
         .extend(bundlerActions)
         .extend(pimlicoBundlerActions)
-        
+
     const gasPrices = await smartAccountClient.getUserOperationGasPrice()
 
-    const callData = await account.encodeCallData({ 
-        to: "0xd8da6bf26964af9d7eed9e03e53415d37aa96045", 
+    const callData = await account.encodeCallData({
+        to: "0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
         data: "0x1234",
-        value: BigInt(0) 
+        value: BigInt(0)
     })
 
     const userOperation = await smartAccountClient.prepareUserOperationRequest({
@@ -86,10 +86,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
             post_url: `${NEXT_PUBLIC_URL}/api/etherscan`,
         }),
     );
-    
-
-
 }
-  
+
 
 export const dynamic = 'force-dynamic';
