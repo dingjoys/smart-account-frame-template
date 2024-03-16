@@ -1,11 +1,9 @@
-import { NEXT_PUBLIC_URL } from '@/app/config';
-import { deploySafeWallet } from '@/app/lib/deploy-safe';
 import { FrameRequest, getFrameHtmlResponse, getFrameMessage } from '@coinbase/onchainkit';
 import { ImageResponse } from 'next/og';
 import { NextRequest, NextResponse } from 'next/server';
 import { createPimlicoPaymasterClient } from 'permissionless/clients/pimlico';
 import { Address, createPublicClient, http } from 'viem';
-
+import { deploySafeWallet } from '../lib/deploy-safe';
 
 const privateKey = process.env.PRIVATE_KEY!;
 const apiKey = process.env.PIMLICO_API_KEY!;
@@ -24,6 +22,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: process.env.NEYNAR_API_KEY! });
   console.log("isvalid", isValid, message?.button)
+  const fid = message?.interactor.fid
   if (!isValid) {
     return new NextResponse('Invalid Frame message', { status: 400 });
   }
@@ -33,8 +32,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   }
 
   const accountAddress = message.interactor.verified_accounts[0] as Address;
-  let result = await deploySafeWallet(accountAddress)
-
+  let result = await deploySafeWallet(accountAddress, fid)
+  console.log("Deployed To", result)
   // console.log("accountAddress", accountAddress)
   // // send transaction
   // const account = await privateKeyToSafeSmartAccount(publicClient, {

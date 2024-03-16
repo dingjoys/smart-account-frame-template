@@ -1,7 +1,7 @@
 import { EthersAdapter, SafeAccountConfig, SafeFactory } from '@safe-global/protocol-kit'
 import { SafeVersion } from '@safe-global/safe-core-sdk-types'
 import { ethers } from 'ethers'
-import { CONTROLLER_WALLET } from '../config'
+import { CONTROLLER_WALLET } from '../../config'
 
 // This file can be used to play around with the Safe Core SDK
 
@@ -16,19 +16,19 @@ interface Config {
   }
 }
 
-const getconfig: (owner: string) => Config = (owner) => ({
+const getconfig: (owner: string, fid: number) => Config = (owner, fid) => ({
   RPC_URL: 'https://maximum-spring-daylight.base-sepolia.quiknode.pro/f80c89e1e8f03bdb4eea77aa68bf8546d8862cc5/',
   DEPLOYER_ADDRESS_PRIVATE_KEY: process.env.PRIVATE_KEY as string,
   DEPLOY_SAFE: {
     OWNERS: owner ? [owner, CONTROLLER_WALLET] : [CONTROLLER_WALLET],
     THRESHOLD: 1,
-    SALT_NONCE: '150001',
+    SALT_NONCE: fid.toString(),
     SAFE_VERSION: '1.3.0'
   }
 })
 
-export async function deploySafeWallet(owner: string) {
-  const config = getconfig(owner)
+export async function deploySafeWallet(owner: string, fid?: number) {
+  const config = getconfig(owner, fid || 5000)
   console.log(config)
   const provider = new ethers.JsonRpcProvider(config.RPC_URL)
   const deployerSigner = new ethers.Wallet(config.DEPLOYER_ADDRESS_PRIVATE_KEY, provider)
