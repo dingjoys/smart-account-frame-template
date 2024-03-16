@@ -14,11 +14,11 @@ export async function GET(request: Request) {
     const address = searchParams.get('address');
     const fid = searchParams.get('fid');
 
-    if (!userOpHash) {
-      return new Response(`The userOpHash parameter is required`, {
-        status: 400,
-      });
-    }
+    // if (!userOpHash) {
+    //   return new Response(`The userOpHash parameter is required`, {
+    //     status: 400,
+    //   });
+    // }
 
     if (!address) {
       return new Response(`The address parameter is required`, {
@@ -50,7 +50,7 @@ export async function GET(request: Request) {
             gap: "30px"
           }}
         >
-          <div style={{ display: 'flex' }}>User Operation hash: {userOpHash.slice(0, 8)}...{userOpHash.slice(60)}</div>
+          {/* <div style={{ display: 'flex' }}>User Operation hash: {userOpHash.slice(0, 8)}...{userOpHash.slice(60)}</div> */}
           <div style={{ display: 'flex' }}>Smart Account Address: {address}</div>
           <div style={{ display: 'flex' }}>FID: {fid}</div>
           <div style={{ display: 'flex' }}>Your smart account has been deployed (might take a minute to show up as indexed on Etherscan)</div>
