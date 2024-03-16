@@ -1,9 +1,9 @@
 import { FrameRequest, getFrameHtmlResponse, getFrameMessage } from '@coinbase/onchainkit';
-import { ImageResponse } from 'next/og';
 import { NextRequest, NextResponse } from 'next/server';
 import { createPimlicoPaymasterClient } from 'permissionless/clients/pimlico';
 import { Address, createPublicClient, http } from 'viem';
-import { deploySafeWallet } from '../lib/deploy-safe';
+import { NEXT_PUBLIC_URL } from '@/app/config';
+import fetch from 'node-fetch';
 
 const privateKey = process.env.PRIVATE_KEY!;
 const apiKey = process.env.PIMLICO_API_KEY!;
@@ -32,8 +32,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   }
 
   const accountAddress = message.interactor.verified_accounts[0] as Address;
-  let result = await deploySafeWallet(accountAddress, fid)
-  console.log("Deployed To", result)
+  // let result = await deploySafeWallet(accountAddress, fid)
+  // console.log("Deployed To", result)
   // console.log("accountAddress", accountAddress)
   // // send transaction
   // const account = await privateKeyToSafeSmartAccount(publicClient, {
@@ -73,6 +73,11 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   //     entryPoint: "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789"
   // })
 
+
+
+  const response = await fetch('http://8.217.5.3:3344/helloworld');
+  const data: any = await response.json();
+
   return new NextResponse(
     getFrameHtmlResponse({
       buttons: [
@@ -81,7 +86,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
           action: "post_redirect"
         },
       ],
-      image: `${NEXT_PUBLIC_URL}/api/og?address=${result}&fid=${message.interactor.fid}`,
+      image: `${NEXT_PUBLIC_URL}/api/og?address=${data?.msg || "xxxx"}&fid=${message.interactor.fid}`,
       post_url: `${NEXT_PUBLIC_URL}/api/etherscan`,
     }),
   );
