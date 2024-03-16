@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createPimlicoPaymasterClient } from 'permissionless/clients/pimlico';
 import { Address, createPublicClient, http } from 'viem';
 import { NEXT_PUBLIC_URL } from '@/app/config';
-import fetch from 'node-fetch';
 
 const privateKey = process.env.PRIVATE_KEY!;
 const apiKey = process.env.PIMLICO_API_KEY!;
