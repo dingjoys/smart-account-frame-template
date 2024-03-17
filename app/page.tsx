@@ -5,10 +5,7 @@ import { NEXT_PUBLIC_URL, TEMPLATE_PUBLIC_URL } from "./config";
 const frameMetadata = getFrameMetadata({
   buttons: [
     {
-      label: "Deploy Smart Account",
-    },
-    {
-      label: "What is going on",
+      label: "Start The Journey",
     },
   ],
   image: `${TEMPLATE_PUBLIC_URL}/main.png`,
@@ -17,10 +14,10 @@ const frameMetadata = getFrameMetadata({
 
 export const metadata: Metadata = {
   title: "Metopia Service",
-  description: "LFG",
+  description: "",
   openGraph: {
-    title: "Smart Account Frame Templatess",
-    description: "LFG",
+    title: "Metopia Service",
+    description: "",
     images: [`${TEMPLATE_PUBLIC_URL}/main.png`],
   },
   other: {
