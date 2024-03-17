@@ -24,14 +24,13 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
    * data: owners, safeAddress, credentials
    */
   const data: any = await response.json();
-  console.log(data)
+  console.log(data, fid)
   let status = data?.data?.safeAddress ? 1 : 0
   let verified = data?.data?.credentialSymbol?.indexOf("1") > -1
   if (status == 1) {
     // Internal account has been created
     if (verified) {
       // Internal account has been Verified
-      console.log("HERE")
       return new NextResponse(
         getFrameHtmlResponse({
           buttons: [
@@ -43,9 +42,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
               label: `Launch Pad`,
             },
           ],
-          // Display status
-
-          // image: `${NEXT_PUBLIC_URL}/main.png`,
           image: `${NEXT_PUBLIC_URL}/api/og?address=${addresses || "empty"}&fid=${message.interactor.fid}&safe=${data.data.safeAddress}`,
           post_url: `${NEXT_PUBLIC_URL}/api/launchpad?verified=1&safe=${data.data.safeAddress}`,
         }),

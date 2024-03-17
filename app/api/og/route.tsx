@@ -10,6 +10,7 @@ export async function GET(request: Request) {
     const userOpHash = searchParams.get("userOpHash");
     const safe = searchParams.get("safe");
     const fid = searchParams.get("fid");
+    console.log(searchParams, safe)
 
     // if (!safe) {
     //   return new Response(`The address parameter is required`, {
