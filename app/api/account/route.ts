@@ -35,6 +35,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
           buttons: [
             {
               label: `Explorer`,
+              action:  'post_redirect'
             },
             {
               label: `Launch Pad`,

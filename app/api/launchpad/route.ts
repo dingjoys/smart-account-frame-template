@@ -54,7 +54,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const verified = searchParams.get('verified');
     const safe = searchParams.get('safe');
     if (verified && message?.button == 1) {
-        console.log("redirecting")
+        console.log("redirecting", `https://sepolia.basescan.org/address/${safe}`)
         return NextResponse.redirect(
             `https://sepolia.basescan.org/address/${safe}`,
             // { status: 302 },
