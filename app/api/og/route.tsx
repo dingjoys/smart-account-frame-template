@@ -10,6 +10,7 @@ export async function GET(request: Request) {
     const userOpHash = searchParams.get("userOpHash");
     const safe = searchParams.get("safe");
     const fid = searchParams.get("fid");
+    const balance = searchParams.get("balance");
     console.log(searchParams, safe);
 
     // if (!safe) {
@@ -44,6 +45,7 @@ export async function GET(request: Request) {
           }}
         >
           <div style={{ display: "flex" }}>Safe Address: {safe}</div>
+          <div style={{ display: "flex" }}>Balance: {safe}</div>
           {Object.keys(data?.data?.credentials || {}).map((key) => {
             return (
               <div style={{ display: "flex" }}>
