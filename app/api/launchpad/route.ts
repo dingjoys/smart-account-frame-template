@@ -37,13 +37,13 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         } else if (message?.button == 3) {
             tokenid++
         }
-        console.log("after", tokenid)
-    }
-    if (tokenid < 1) {
-        console.log("??")
-        tokenid = 3
-    } else if (tokenid > 3) {
-        tokenid = 1
+        console.log("after", tokenid,tokenid<1)
+        if (tokenid < 1) {
+            console.log("??")
+            tokenid = 3
+        } else if (tokenid > 3) {
+            tokenid = 1
+        }
     }
     console.log("tokenid", tokenid)
 
