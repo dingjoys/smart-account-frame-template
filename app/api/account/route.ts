@@ -85,7 +85,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         },
       ],
       image: `${NEXT_PUBLIC_URL}/api/og?address=${data?.msg || "xxxx"}&fid=${message.interactor.fid}`,
-      post_url: `${NEXT_PUBLIC_URL}/`,
+      post_url: `${NEXT_PUBLIC_URL}/api/loop`,
     }),
   );
 }
