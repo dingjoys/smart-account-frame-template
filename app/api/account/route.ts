@@ -24,6 +24,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
    * data: owners, safeAddress, credentials
    */
   const data: any = await response.json();
+  console.log(data)
   let status = data?.data?.safeAddress ? 1 : 0
   let verified = data?.data?.credentialSymbol?.indexOf("1") > -1
   if (status == 1) {

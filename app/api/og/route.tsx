@@ -17,10 +17,10 @@ export async function GET(request: Request) {
     //   });
     // }
 
-    const response = await fetch(`http://8.217.5.3:3344/account/${fid}`);
-    // console.log(response.json())
-    const data: any = await response.json();
-    console.log("OG request", data);
+    // const response = await fetch(`http://8.217.5.3:3344/account/${fid}`);
+    // // console.log(response.json())
+    // const data: any = await response.json();
+    // console.log("OG request", data);
 
     return new ImageResponse(
       (
@@ -35,7 +35,7 @@ export async function GET(request: Request) {
             paddingTop: "50",
             paddingLeft: "100",
             paddingRight: "100",
-            backgroundImage: `${NEXT_PUBLIC_URL}/main.png`,
+            backgroundImage: `url(${NEXT_PUBLIC_URL}/main.png)`,
             backdropFilter: "blur(4px)",
             color: "#fff",
             fontSize: 32,
