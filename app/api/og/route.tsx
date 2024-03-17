@@ -45,7 +45,7 @@ export async function GET(request: Request) {
           }}
         >
           <div style={{ display: "flex" }}>Safe Address: {safe}</div>
-          <div style={{ display: "flex" }}>Balance: {safe}</div>
+          <div style={{ display: "flex" }}>Balance: {balance}</div>
           {Object.keys(data?.data?.credentials || {}).map((key) => {
             return (
               <div style={{ display: "flex" }}>
