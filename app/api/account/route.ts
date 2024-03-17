@@ -35,14 +35,14 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
           buttons: [
             {
               label: `Explorer`,
-              action:  'post_redirect'
+              action: 'post_redirect'
             },
             {
               label: `Launch Pad`,
             },
           ],
           // Display status
-          image: `${NEXT_PUBLIC_URL}/api/og?address=${addresses || "empty"}&fid=${message.interactor.fid}`,
+          image: `${NEXT_PUBLIC_URL}/api/og?address=${addresses || "empty"}&fid=${message.interactor.fid}&safe=${data.data.safeAddress}`,
           post_url: `${NEXT_PUBLIC_URL}/api/launchpad?verified=1&safe=${data.data.safeAddress}`,
         }),
       );

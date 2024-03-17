@@ -56,7 +56,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     if (verified && message?.button == 1) {
         console.log("redirecting", `https://sepolia.basescan.org/address/${safe}`)
         return NextResponse.redirect(
-            `https://sepolia.basescan.org/address/${safe}`,
+            `https://app.safe.global/home?safe=basesep:${safe}`,
             { status: 302 },
         );
     }
