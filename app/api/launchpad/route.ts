@@ -24,10 +24,31 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const fid = message?.interactor.fid
 
     const { searchParams } = new URL(req.url);
-    const tokenid = searchParams.get('tokenid');
+
+
+    let tokenid = 0
+    if (!searchParams.get('tokenid')) {
+        tokenid = 1
+    } else {
+        let tokenid = parseInt(searchParams.get('tokenid') || "1");
+        if (message?.button == 1) {
+            tokenid--
+        }
+        if (message?.button == 3) {
+            tokenid++
+        }
+    }
+    if (tokenid < 1) {
+        tokenid = 3
+    } else if (tokenid > 3) {
+        tokenid = 1
+    }
+    console.log("tokenid", tokenid)
+
     const verified = searchParams.get('verified');
     const safe = searchParams.get('safe');
     if (verified && message?.button == 1) {
+        console.log("redirecting")
         return NextResponse.redirect(
             `https://sepolia.basescan.org/address/${safe}`,
             { status: 302 },
@@ -62,8 +83,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
                     label: `Next`,
                 },
             ],
-            image: `${NEXT_PUBLIC_URL}/IFO-1.png`,
-            post_url: `${NEXT_PUBLIC_URL}/api/launchpad`,
+            image: `${NEXT_PUBLIC_URL}/final-${tokenid}.png`,
+            post_url: `${NEXT_PUBLIC_URL}/api/launchpad?curr=${tokenid}`,
         }),
     );
 }
