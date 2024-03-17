@@ -8,10 +8,10 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const userOpHash = searchParams.get("userOpHash");
-    const address = searchParams.get("address");
+    const safe = searchParams.get("safe");
     const fid = searchParams.get("fid");
 
-    if (!address) {
+    if (!safe) {
       return new Response(`The address parameter is required`, {
         status: 400,
       });
@@ -36,14 +36,14 @@ export async function GET(request: Request) {
             paddingLeft: "100",
             paddingRight: "100",
             backgroundColor: `${NEXT_PUBLIC_URL}/main.png`,
-            backdropFilter: "blur(20px)",
+            backdropFilter: "blur(4px)",
             color: "#fff",
             fontSize: 32,
             fontWeight: 600,
             gap: "30px",
           }}
         >
-          <div style={{ display: "flex" }}>Safe Address: {address}</div>
+          <div style={{ display: "flex" }}>Safe Address: {safe}</div>
           {/* <div style={{ display: 'flex' }}>FID: {fid}</div>
           <div style={{ display: 'flex' }}>Your smart account has been deployed (might take a minute to show up as indexed on Etherscan)</div>
           <div style={{ display: 'flex' }}>Source code: https://github.com/pimlicolabs/smart-account-frame-template</div> */}
