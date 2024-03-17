@@ -11,11 +11,11 @@ export async function GET(request: Request) {
     const safe = searchParams.get("safe");
     const fid = searchParams.get("fid");
 
-    if (!safe) {
-      return new Response(`The address parameter is required`, {
-        status: 400,
-      });
-    }
+    // if (!safe) {
+    //   return new Response(`The address parameter is required`, {
+    //     status: 400,
+    //   });
+    // }
 
     // const response = await fetch(`http://8.217.5.3:3344/account/${fid}`);
     // // console.log(response.json())
