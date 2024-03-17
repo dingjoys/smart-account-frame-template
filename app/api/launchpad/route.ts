@@ -31,15 +31,16 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         tokenid = 1
     } else {
         let tokenid = parseInt(searchParams.get('curr') || "1");
-        console.log(tokenid)
+        console.log("before",tokenid)
         if (message?.button == 1) {
             tokenid--
         } else if (message?.button == 3) {
             tokenid++
         }
-        console.log(tokenid)
+        console.log("after", tokenid)
     }
     if (tokenid < 1) {
+        console.log("??")
         tokenid = 3
     } else if (tokenid > 3) {
         tokenid = 1
