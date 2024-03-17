@@ -29,11 +29,26 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       getFrameHtmlResponse({
         buttons: [
           {
+            label: `Get Verified`,
+          },{
+            label: `Continue Anyway`,
+          },
+        ],
+        image: `${NEXT_PUBLIC_URL}/api/og?address=${addresses || "empty"}&fid=${message.interactor.fid}`,
+        post_url: `${NEXT_PUBLIC_URL}/api/launchpad`,
+      }),
+    );
+  } else if (status == 1) {
+    // Internal account has been Verified
+    return new NextResponse(
+      getFrameHtmlResponse({
+        buttons: [
+          {
             label: `Launch Pad`,
           },
         ],
         // Display status
-        image: `${NEXT_PUBLIC_URL}/api/og?address=${data?.msg || "xxxx"}&fid=${message.interactor.fid}`,
+        image: `${NEXT_PUBLIC_URL}/api/og?address=${addresses || "empty"}&fid=${message.interactor.fid}`,
         post_url: `${NEXT_PUBLIC_URL}/api/launchpad`,
       }),
     );
