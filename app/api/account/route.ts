@@ -73,7 +73,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   // })
 
   const response = await fetch('http://8.217.5.3:3344/helloworld');
-  console.log(response.json())
+  // console.log(response.json())
   const data: any = await response.json();
 
   return new NextResponse(
