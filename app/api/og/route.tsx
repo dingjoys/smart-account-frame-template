@@ -36,7 +36,7 @@ export async function GET(request: Request) {
             paddingLeft: "100",
             paddingRight: "100",
             backgroundColor: `${NEXT_PUBLIC_URL}/main.png`,
-            // backdropFilter: "blur(4px)",
+            backdropFilter: "blur(4px)",
             color: "#fff",
             fontSize: 32,
             fontWeight: 600,
