@@ -31,12 +31,13 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         tokenid = 1
     } else {
         let tokenid = parseInt(searchParams.get('curr') || "1");
+        console.log(tokenid)
         if (message?.button == 1) {
             tokenid--
-        }
-        if (message?.button == 3) {
+        } else if (message?.button == 3) {
             tokenid++
         }
+        console.log(tokenid)
     }
     if (tokenid < 1) {
         tokenid = 3
