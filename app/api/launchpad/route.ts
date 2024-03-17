@@ -25,21 +25,25 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     const { searchParams } = new URL(req.url);
 
+    if (!isValid) {
+        return new NextResponse('Invalid Frame message', { status: 400 });
+    }
+
+    if (!message) {
+        return new NextResponse('Invalid Frame message', { status: 400 });
+    }
 
     let tokenid = 0
     if (!searchParams.get('curr')) {
         tokenid = 1
     } else {
-        let tokenid = parseInt(searchParams.get('curr') || "1");
-        console.log("before",tokenid)
+        tokenid = parseInt(searchParams.get('curr') || "1");
         if (message?.button == 1) {
             tokenid--
         } else if (message?.button == 3) {
             tokenid++
         }
-        console.log("after", tokenid,tokenid<1)
         if (tokenid < 1) {
-            console.log("??")
             tokenid = 3
         } else if (tokenid > 3) {
             tokenid = 1
@@ -55,14 +59,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
             `https://sepolia.basescan.org/address/${safe}`,
             // { status: 302 },
         );
-    }
-
-    if (!isValid) {
-        return new NextResponse('Invalid Frame message', { status: 400 });
-    }
-
-    if (!message) {
-        return new NextResponse('Invalid Frame message', { status: 400 });
     }
 
     const accountAddresses = message.interactor.verified_accounts as Address[];
