@@ -17,7 +17,7 @@ export async function GET(request: Request) {
       });
     }
 
-    const response = await fetch("http://8.217.5.3:3344/helloworld");
+    const response = await fetch(`http://8.217.5.3:3344/account/${fid}`);
     // console.log(response.json())
     const data: any = await response.json();
     console.log("OG request", data);
@@ -43,7 +43,7 @@ export async function GET(request: Request) {
             gap: "30px",
           }}
         >
-          <div style={{ display: "flex" }}>Safe Address: {safe}</div>
+          {/* <div style={{ display: "flex" }}>Safe Address: {safe}</div> */}
           {/* {Object.keys(data?.data?.credentials || {}).map((key) => {
             return (
               <div style={{ display: "flex" }}>
