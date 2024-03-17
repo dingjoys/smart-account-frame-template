@@ -64,7 +64,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const accountAddresses = message.interactor.verified_accounts as Address[];
     let addresses = JSON.stringify(accountAddresses)
 
-    const response = await fetch('http://8.217.5.3:3344/helloworld');
+    const response = await fetch(`http://8.217.5.3:3344/account/${fid}`);
     // console.log(response.json())
     const data: any = await response.json();
 
@@ -73,7 +73,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
             buttons: [
                 {
                     label: `Last`,
-                    
                 },
                 {
                     label: `Pay $`,

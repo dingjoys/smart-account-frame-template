@@ -25,7 +25,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
    */
   const data: any = await response.json();
   let status = data?.data?.safeAddress ? 1 : 0
-  let verified = data?.data?.credentialsSymbol?.indexOf("1") > -1
+  let verified = data?.data?.credentialSymbol?.indexOf("1") > -1
   if (status == 1) {
     // Internal account has been created
     if (verified) {
