@@ -57,7 +57,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         console.log("redirecting", `https://sepolia.basescan.org/address/${safe}`)
         return NextResponse.redirect(
             `https://sepolia.basescan.org/address/${safe}`,
-            // { status: 302 },
+            { status: 302 },
         );
     }
 
@@ -73,6 +73,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
             buttons: [
                 {
                     label: `Last`,
+                    
                 },
                 {
                     label: `Pay $`,
