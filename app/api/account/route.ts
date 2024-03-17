@@ -19,39 +19,46 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   const accountAddresses = message.interactor.verified_accounts as Address[];
   let addresses = JSON.stringify(accountAddresses)
 
-  const response = await fetch('http://8.217.5.3:3344/helloworld');
+  const response = await fetch(`http://8.217.5.3:3344/account/${fid}`);
+  /**
+   * owners, safeAddress, credentials
+   */
   const data: any = await response.json();
-
-  let status = 1;
+console.log(data)
+  let status = data?.data ? 1 : 0
+  let verified = data?.data?.credentials?.indexOf("1") > -1
   if (status == 1) {
     // Internal account has been created
-    return new NextResponse(
-      getFrameHtmlResponse({
-        buttons: [
-          {
-            label: `Get Verified`,
-          },{
-            label: `Continue Anyway`,
-          },
-        ],
-        image: `${NEXT_PUBLIC_URL}/api/og?address=${addresses || "empty"}&fid=${message.interactor.fid}`,
-        post_url: `${NEXT_PUBLIC_URL}/api/launchpad`,
-      }),
-    );
-  } else if (status == 1) {
-    // Internal account has been Verified
-    return new NextResponse(
-      getFrameHtmlResponse({
-        buttons: [
-          {
-            label: `Launch Pad`,
-          },
-        ],
-        // Display status
-        image: `${NEXT_PUBLIC_URL}/api/og?address=${addresses || "empty"}&fid=${message.interactor.fid}`,
-        post_url: `${NEXT_PUBLIC_URL}/api/launchpad`,
-      }),
-    );
+    if (!verified) {
+      return new NextResponse(
+        getFrameHtmlResponse({
+          buttons: [
+            {
+              label: `Get Verified`,
+            }, {
+              label: `Continue Anyway`,
+            },
+          ],
+          image: `${NEXT_PUBLIC_URL}/api/og?address=${addresses || "empty"}&fid=${message.interactor.fid}`,
+          post_url: `${NEXT_PUBLIC_URL}/api/launchpad`,
+        }),
+
+      );
+    } else if (status == 1) {
+      // Internal account has been Verified
+      return new NextResponse(
+        getFrameHtmlResponse({
+          buttons: [
+            {
+              label: `Launch Pad`,
+            },
+          ],
+          // Display status
+          image: `${NEXT_PUBLIC_URL}/api/og?address=${addresses || "empty"}&fid=${message.interactor.fid}`,
+          post_url: `${NEXT_PUBLIC_URL}/api/launchpad`,
+        }),
+      );
+    }
   } else {
     // Creating the internal account
     return new NextResponse(
