@@ -21,15 +21,28 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
   const response = await fetch(`http://8.217.5.3:3344/account/${fid}`);
   /**
-   * owners, safeAddress, credentials
+   * data: owners, safeAddress, credentials
    */
   const data: any = await response.json();
-console.log(data)
-  let status = data?.data ? 1 : 0
+  let status = data?.data?.safeAddress ? 1 : 0
   let verified = data?.data?.credentials?.indexOf("1") > -1
   if (status == 1) {
     // Internal account has been created
-    if (!verified) {
+    if (verified) {
+      // Internal account has been Verified
+      return new NextResponse(
+        getFrameHtmlResponse({
+          buttons: [
+            {
+              label: `Launch Pad`,
+            },
+          ],
+          // Display status
+          image: `${NEXT_PUBLIC_URL}/api/og?address=${addresses || "empty"}&fid=${message.interactor.fid}`,
+          post_url: `${NEXT_PUBLIC_URL}/api/launchpad`,
+        }),
+      );
+    } else {
       return new NextResponse(
         getFrameHtmlResponse({
           buttons: [
@@ -43,20 +56,6 @@ console.log(data)
           post_url: `${NEXT_PUBLIC_URL}/api/launchpad`,
         }),
 
-      );
-    } else if (status == 1) {
-      // Internal account has been Verified
-      return new NextResponse(
-        getFrameHtmlResponse({
-          buttons: [
-            {
-              label: `Launch Pad`,
-            },
-          ],
-          // Display status
-          image: `${NEXT_PUBLIC_URL}/api/og?address=${addresses || "empty"}&fid=${message.interactor.fid}`,
-          post_url: `${NEXT_PUBLIC_URL}/api/launchpad`,
-        }),
       );
     }
   } else {
