@@ -17,10 +17,10 @@ export async function GET(request: Request) {
       });
     }
 
-    // const response = await fetch("http://8.217.5.3:3344/helloworld");
-    // // console.log(response.json())
-    // const data: any = await response.json();
-    // console.log("OG request", data);
+    const response = await fetch("http://8.217.5.3:3344/helloworld");
+    // console.log(response.json())
+    const data: any = await response.json();
+    console.log("OG request", data);
 
     return new ImageResponse(
       (
