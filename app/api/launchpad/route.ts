@@ -38,6 +38,24 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         tokenid = 1
     } else {
         tokenid = parseInt(searchParams.get('curr') || "1");
+
+        if (searchParams.get('curr') && message.button == 2) {
+            // Joined
+            fetch(`http://localhost:3344/ifo/swap?fid=${fid}&contractIndex=${tokenid}`);
+            // console.log(response.json())
+            return new NextResponse(
+                getFrameHtmlResponse({
+                    buttons: [
+                        {
+                            label: `Back`,
+                        },
+                    ],
+                    image: `${NEXT_PUBLIC_URL}/congrats.png`,
+                    post_url: `${NEXT_PUBLIC_URL}/api/account`,
+                }),
+            );
+        }
+
         if (message?.button == 1) {
             tokenid--
         } else if (message?.button == 3) {
@@ -54,19 +72,19 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const verified = searchParams.get('verified');
     const safe = searchParams.get('safe');
     if (verified && message?.button == 1) {
-        console.log("redirecting", `https://sepolia.basescan.org/address/${safe}`)
         return NextResponse.redirect(
             `https://app.safe.global/home?safe=basesep:${safe}`,
             { status: 302 },
         );
     }
 
-    const accountAddresses = message.interactor.verified_accounts as Address[];
-    let addresses = JSON.stringify(accountAddresses)
-
-    const response = await fetch(`http://8.217.5.3:3344/account/${fid}`);
+    const response = await fetch(`http://localhost:3344/ifo/info?contractIndex=${tokenid}`);
     // console.log(response.json())
     const data: any = await response.json();
+    console.log(data)
+
+
+
 
     return new NextResponse(
         getFrameHtmlResponse({
