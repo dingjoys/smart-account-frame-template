@@ -27,10 +27,10 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
 
     let tokenid = 0
-    if (!searchParams.get('tokenid')) {
+    if (!searchParams.get('curr')) {
         tokenid = 1
     } else {
-        let tokenid = parseInt(searchParams.get('tokenid') || "1");
+        let tokenid = parseInt(searchParams.get('curr') || "1");
         if (message?.button == 1) {
             tokenid--
         }
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         console.log("redirecting")
         return NextResponse.redirect(
             `https://sepolia.basescan.org/address/${safe}`,
-            { status: 302 },
+            // { status: 302 },
         );
     }
 
