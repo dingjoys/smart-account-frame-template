@@ -72,22 +72,20 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   //     entryPoint: "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789"
   // })
 
-
-
   const response = await fetch('http://8.217.5.3:3344/helloworld');
-  console.log(response)
+  console.log(response.json())
   const data: any = await response.json();
 
   return new NextResponse(
     getFrameHtmlResponse({
       buttons: [
         {
-          label: `View Smart Account`,
-          action: "post_redirect"
+          label: `Back`,
+          // action: "post_redirect"
         },
       ],
       image: `${NEXT_PUBLIC_URL}/api/og?address=${data?.msg || "xxxx"}&fid=${message.interactor.fid}`,
-      post_url: `${NEXT_PUBLIC_URL}/api/etherscan`,
+      post_url: `${NEXT_PUBLIC_URL}/`,
     }),
   );
 }
