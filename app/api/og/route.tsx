@@ -10,7 +10,7 @@ export async function GET(request: Request) {
     const userOpHash = searchParams.get("userOpHash");
     const safe = searchParams.get("safe");
     const fid = searchParams.get("fid");
-    console.log(searchParams, safe)
+    console.log(searchParams, safe);
 
     // if (!safe) {
     //   return new Response(`The address parameter is required`, {
@@ -47,7 +47,8 @@ export async function GET(request: Request) {
           {Object.keys(data?.data?.credentials || {}).map((key) => {
             return (
               <div style={{ display: "flex" }}>
-                {key}: {data.data.credentials[key]}
+                {key}:{" "}
+                {data.data.credentials[key] ? "Verified" : "Not Verified"}
               </div>
             );
           })}
