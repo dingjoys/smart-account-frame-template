@@ -34,12 +34,15 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         getFrameHtmlResponse({
           buttons: [
             {
+              label: `Explorer`,
+            },
+            {
               label: `Launch Pad`,
             },
           ],
           // Display status
           image: `${NEXT_PUBLIC_URL}/api/og?address=${addresses || "empty"}&fid=${message.interactor.fid}`,
-          post_url: `${NEXT_PUBLIC_URL}/api/launchpad`,
+          post_url: `${NEXT_PUBLIC_URL}/api/launchpad?verified=1&safe=${data.data.safeAddress}`,
         }),
       );
     } else {
@@ -53,7 +56,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
             },
           ],
           image: `${NEXT_PUBLIC_URL}/api/og?address=${addresses || "empty"}&fid=${message.interactor.fid}`,
-          post_url: `${NEXT_PUBLIC_URL}/api/launchpad`,
+          post_url: `${NEXT_PUBLIC_URL}/api/launchpad?verified=0&safe=${data.data.safeAddress}`,
         }),
 
       );
@@ -77,7 +80,3 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 export const dynamic = 'force-dynamic';
 export const runtime = 'edge';
 
-// return NextResponse.redirect(
-//   `https://sepolia.etherscan.io/address/${account.address}`,
-//   { status: 302 },
-// );

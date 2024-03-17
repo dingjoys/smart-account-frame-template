@@ -6,29 +6,15 @@ export const dynamic = 'force-dynamic';
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-
-    // const logo = searchParams.get('logo');
-    // const logo = "https://docs-og-pimlico.vercel.app/pimlico-purple.svg"
-    // const logo = "./pimlico-purple.svg"
     const userOpHash = searchParams.get('userOpHash');
     const address = searchParams.get('address');
     const fid = searchParams.get('fid');
-
-    // if (!userOpHash) {
-    //   return new Response(`The userOpHash parameter is required`, {
-    //     status: 400,
-    //   });
-    // }
 
     if (!address) {
       return new Response(`The address parameter is required`, {
         status: 400,
       });
     }
-
-    // const imageData = await fetch(new URL('./pimlico-purple.svg', import.meta.url)).then(
-    //   (res) => res.arrayBuffer(),
-    // );
 
     return new ImageResponse(
       (

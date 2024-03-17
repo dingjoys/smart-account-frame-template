@@ -8,7 +8,7 @@ const frameMetadata = getFrameMetadata({
       label: "Start The Journey",
     },
   ],
-  image: `${TEMPLATE_PUBLIC_URL}/main.png`,
+  image: `${NEXT_PUBLIC_URL}/main.png`,
   post_url: `${NEXT_PUBLIC_URL}/api/account`,
   
 });
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Metopia Service",
     description: "",
-    images: [`${TEMPLATE_PUBLIC_URL}/main.png`],
+    images: [`${NEXT_PUBLIC_URL}/main.png`],
   },
   other: {
     ...frameMetadata,
