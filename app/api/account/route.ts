@@ -42,7 +42,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
               label: `Launch Pad`,
             },
           ],
-          image: `${NEXT_PUBLIC_URL}/api/og?address=${addresses || "empty"}&fid=${message.interactor.fid}&safe=${data.data.safeAddress}`,
+          image: `${NEXT_PUBLIC_URL}/api/og?fid=${message.interactor.fid}&safe=${data.data.safeAddress}`,
           post_url: `${NEXT_PUBLIC_URL}/api/launchpad?verified=1&safe=${data.data.safeAddress}`,
         }),
       );
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
               label: `Continue Anyway`,
             },
           ],
-          image: `${NEXT_PUBLIC_URL}/api/og?address=${addresses || "empty"}&fid=${message.interactor.fid}`,
+          image: `${NEXT_PUBLIC_URL}/api/og?&fid=${message.interactor.fid}`,
           post_url: `${NEXT_PUBLIC_URL}/api/launchpad?verified=0&safe=${data.data.safeAddress}`,
         }),
 
